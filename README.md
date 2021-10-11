@@ -23,9 +23,9 @@ let's assume you're going to run both the server and client on the same computer
 
 # things the tower does
 
-it shows the driver short names (this is just the first three letters of their name, which was fine in 2020 but Mick Schumacher ruins that in 2021 by being MSC not SCH)
-it shows their order
-it toggles between showing their fastest lap, their delta to the fastest lap, and their current tyres
+* it shows the driver short names (this is just the first three letters of their name, which was fine in 2020 but Mick Schumacher ruins that in 2021 by being MSC not SCH)
+* it shows their order
+* it toggles between showing their fastest lap, their delta to the fastest lap, and their current tyres
 
 # stuff that needs to be done to make this better
 
