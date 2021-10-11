@@ -29,13 +29,13 @@ let's assume you're going to run both the server and client on the same computer
 
 # stuff that needs to be done to make this better
 
-the node.js app gets the data and just passes it on, leaving the react app to basically do both the processing of the data and the rendering and the updating of it, and this seems a bit wrong to me. instead, i reckon the node.js app should receive and transform the data, and then pump out nicely shaped JSON that the react app can just pump out and focus on looking nice and pretty.
+* the node.js app gets the data and just passes it on, leaving the react app to basically do both the processing of the data and the rendering and the updating of it, and this seems a bit wrong to me. instead, i reckon the node.js app should receive and transform the data, and then pump out nicely shaped JSON that the react app can just pump out and focus on looking nice and pretty.
 
-also it shouldn't just cycle round the three different states every 20 seconds or whatever. plus it's pointless in a race, as you want deltas to the car in front/leader/number of stops/retirements/other stuff that i didn't get done
+* also it shouldn't just cycle round the three different states every 20 seconds or whatever. plus it's pointless in a race, as you want deltas to the car in front/leader/number of stops/retirements/other stuff that i didn't get done
 
-also the idea was that twitch chat can control this. none of this happens at the moment.
+* also the idea was that twitch chat can control this. none of this happens at the moment.
 
-also why just a tower? why not other stuff like at the bottom when you have two drivers and it compares lap times and you do a "!compare 1 2" to compare the lap times of drivers in 1st and 2nd
+* also why just a tower? why not other stuff like at the bottom when you have two drivers and it compares lap times and you do a "!compare 1 2" to compare the lap times of drivers in 1st and 2nd
 
 you see now why i never finished this
 
