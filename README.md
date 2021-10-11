@@ -37,5 +37,6 @@ let's assume you're going to run both the server and client on the same computer
 
 * also why just a tower? why not other stuff like at the bottom when you have two drivers and it compares lap times and you do a "!compare 1 2" to compare the lap times of drivers in 1st and 2nd
 
-you see now why i never finished this
+* also why not support F1 2021??? the client thingy does so there's no reason to not support it, but i haven't actually tried as i did this before F1 2021 came out and only just put it on github
 
+you see now why i never finished this
