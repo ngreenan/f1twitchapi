@@ -1,0 +1,48 @@
+.tower {
+    position: relative;
+    padding-bottom: 800px;
+    font-family: 'Formula1';
+    display: block;
+    --tower-header-height: 35px;
+    margin-top: 50px;
+    margin-left: 85px;
+}
+
+.tower-header {
+    color: white;
+    width: 146px;
+    height: 73px;
+    text-align: center;
+}
+
+.tower-header-session {
+    background-color: black;
+    color: white;
+    font-family: 'Formula1Wide';
+    font-size: 22px;
+    height: var(--tower-header-height);
+    line-height: var(--tower-header-height);
+    padding-top: 2px;
+    border-radius: 0 12.5px 0 0;
+}
+
+.tower-header-divider {
+    height: 1px;
+    padding-top: 0.5px;
+    background: linear-gradient(90deg, rgba(0,0,0,1) 15%, rgba(169,169,169,1) 50%, rgba(0,0,0,1) 85%);
+}
+
+.tower-header-remaining {
+    background-color: black;
+    color: white;
+    font-family: 'Formula1';
+    font-size: 22px;
+    height: var(--tower-header-height);
+    line-height: var(--tower-header-height);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -2px;
+}
+
+.tower-drivers {
+    position: relative;
+}

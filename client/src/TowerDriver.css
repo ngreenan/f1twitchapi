@@ -1,0 +1,194 @@
+.tower-driver {
+    position: absolute;
+    top: 0;
+    left: 0;
+    --driver-spacing: 36px;
+    --driver-margin: 4px;
+    display: flex;
+    /* background-color: rgba(255,0,0,0.5); */
+    transition: top ease-in .5s;
+}
+
+.tower-driver-1 {
+    top: calc(var(--driver-spacing) * 0);
+}
+
+.tower-driver-2 {
+    top: calc(var(--driver-spacing) * 1);
+}
+
+.tower-driver-3 {
+    top: calc(var(--driver-spacing) * 2);
+}
+
+.tower-driver-4 {
+    top: calc(var(--driver-spacing) * 3);
+}
+
+.tower-driver-5 {
+    top: calc(var(--driver-spacing) * 4);
+}
+
+.tower-driver-6 {
+    top: calc(var(--driver-spacing) * 5);
+}
+
+.tower-driver-7 {
+    top: calc(var(--driver-spacing) * 6);
+}
+
+.tower-driver-8 {
+    top: calc(var(--driver-spacing) * 7);
+}
+
+.tower-driver-9 {
+    top: calc(var(--driver-spacing) * 8);
+}
+
+.tower-driver-10 {
+    top: calc(var(--driver-spacing) * 9);
+}
+
+.tower-driver-11 {
+    top: calc(var(--driver-spacing) * 10);
+}
+
+.tower-driver-12 {
+    top: calc(var(--driver-spacing) * 11);
+}
+
+.tower-driver-13 {
+    top: calc(var(--driver-spacing) * 12);
+}
+
+.tower-driver-14 {
+    top: calc(var(--driver-spacing) * 13);
+}
+
+.tower-driver-15 {
+    top: calc(var(--driver-spacing) * 14);
+}
+
+.tower-driver-16 {
+    top: calc(var(--driver-spacing) * 15);
+}
+
+.tower-driver-17 {
+    top: calc(var(--driver-spacing) * 16);
+}
+
+.tower-driver-18 {
+    top: calc(var(--driver-spacing) * 17);
+}
+
+.tower-driver-19 {
+    top: calc(var(--driver-spacing) * 18);
+}
+
+.tower-driver-20 {
+    top: calc(var(--driver-spacing) * 19);
+}
+
+.tower-driver-21 {
+    top: calc(var(--driver-spacing) * 20);
+}
+
+.tower-driver-22 {
+    top: calc(var(--driver-spacing) * 21);
+}
+
+.tower-driver-position-outer {
+    background-color: black;
+    padding: calc(var(--driver-margin) / 4);
+    padding-left: calc(var(--driver-margin) / 2);
+    height: calc(var(--driver-spacing) - (var(--driver-margin) / 2));
+}
+
+.tower-driver-position-inner {
+    margin: calc(var(--driver-margin) / 4);
+    border-radius: 0 0 10px 0;
+    background-color: white;
+    color: black;
+    width: calc(var(--driver-spacing) - var(--driver-margin));
+    height: calc(var(--driver-spacing) - var(--driver-margin));
+    text-align: center;
+    line-height: calc(var(--driver-spacing) - var(--driver-margin));
+    font-size: calc(var(--driver-spacing) * 0.45);
+}
+
+.tower-driver-name {
+    text-align: left;
+    line-height: var(--driver-spacing);
+    color: white;
+    padding-left: 15px;
+    font-size: calc(var(--driver-spacing) * 0.5);
+    font-family: 'Formula1Bold';
+    width: 94px;
+    height: calc(var(--driver-spacing) - (var(--driver-margin) / 2));
+    padding-top: calc(var(--driver-margin) / 4);
+    padding-bottom: calc(var(--driver-margin) / 4);
+    background-color: black;
+}
+
+.tower-driver-info {
+    text-align: right;
+    line-height: var(--driver-spacing);
+    color: white;
+    font-size: calc(var(--driver-spacing) * 0.52);
+    width: 108px;
+    height: calc(var(--driver-spacing) - (var(--driver-margin) / 2));
+    padding-top: calc(var(--driver-margin) / 4);
+    padding-bottom: calc(var(--driver-margin) / 4);
+    background-color: rgba(0,0,0,0.75);
+    padding-right: calc(var(--driver-margin) * 2);
+    
+    /* transition: width ease-in .1s; */
+}
+
+.tower-driver-1 .tower-driver-info {
+    border-top-right-radius: 10px;
+}
+
+.tower-driver-delta, .tower-driver-best {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -2px;
+}
+
+.tower-driver-no-time {
+    letter-spacing: 0px;
+}
+
+.tower-driver-tyres {
+    width: var(--driver-spacing);
+    height: calc(var(--driver-spacing) - (var(--driver-margin) / 2));
+}
+
+.tower-driver-tyres div {
+    width: calc(var(--driver-spacing) - 5px);
+    height: calc((var(--driver-spacing) - (var(--driver-margin) / 2)) - 5px);
+    padding-top: 5px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    margin-left: 5px;
+}
+
+.tower-driver-tyres-soft {
+    background-image: url('./images/tyres/s.png')
+}
+
+.tower-driver-tyres-medium {
+    background-image: url('./images/tyres/m.png')
+}
+
+.tower-driver-tyres-hard {
+    background-image: url('./images/tyres/h.png')
+}
+
+.tower-driver-tyres-inter {
+    background-image: url('./images/tyres/i.png')
+}
+
+.tower-driver-tyres-wet {
+    background-image: url('./images/tyres/w.png')
+}

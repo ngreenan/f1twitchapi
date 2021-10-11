@@ -1,0 +1,33 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+@font-face {
+  font-family: 'Formula1';
+  src: url('./fonts/Formula1-Regular_web.ttf') format('truetype')
+}
+
+@font-face {
+  font-family: 'Formula1Wide';
+  src: url('./fonts/Formula1-Wide_web.ttf') format('truetype')
+}
+
+@font-face {
+  font-family: 'Formula1Bold';
+  src: url('./fonts/Formula1-Bold_web.ttf') format('truetype')
+}
+
+@font-face {
+  font-family: 'Formula1Black';
+  src: url('./fonts/Formula1-Black.ttf') format('truetype')
+}
