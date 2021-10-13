@@ -21,20 +21,19 @@ function Tower(props) {
         }, 10000)
     }, [])   
 
-    const { sessionResponse, participantsResponse, lapDataResponse, carStatusResponse } = useContext(DataContext)
+    const { sessionResponse, participantsResponse, lapDataResponse, carStatusResponse, processedSessionHistoryResponse } = useContext(DataContext)
 
     var sessionTimeRemaining = new Date(0)
     sessionTimeRemaining.setSeconds(sessionResponse.m_sessionTimeLeft || 0)
 
     var flap
-    
-    if (lapDataResponse && lapDataResponse.m_lapData && lapDataResponse.m_lapData.length > 0) {
-        flap = lapDataResponse.m_lapData
-        .filter((lapData) => lapData.m_bestLapTime > 0)
+
+    if (processedSessionHistoryResponse && processedSessionHistoryResponse.length > 0) {
+        flap = processedSessionHistoryResponse.filter((lapData) => lapData != null && lapData.bestLapTimeInMS != null && lapData.bestLapTimeInMS > 0)
         if (flap.length > 0) {
             flap = flap.reduce((prev, curr) => {
-                return prev.m_bestLapTime < curr.m_bestLapTime ? prev : curr
-            }).m_bestLapTime
+                return prev.bestLapTimeInMS < curr.bestLapTimeInMS ? prev : curr
+            }).bestLapTimeInMS
         } else {
             flap = 0
         }
@@ -54,6 +53,7 @@ function Tower(props) {
                         participant={participant}
                         flap={flap}
                         lapData={lapDataResponse.m_lapData[index]}
+                        sessionHistoryData={processedSessionHistoryResponse[index]}
                         carStatus={carStatusResponse.m_carStatusData[index]} />
                 )) :
                 ''

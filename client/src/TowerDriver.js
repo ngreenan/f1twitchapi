@@ -5,18 +5,18 @@ import { visualTyreCompounds } from './LookupData'
 function TowerDriver(props) {
 
     const date = new Date(0)
-    date.setMilliseconds(props.lapData.m_bestLapTime * 1000)
-
-    const bestLap = props.lapData.m_bestLapTime === 0 ? 'NO TIME' : date.toISOString().substr(15, 8)
-    const delta = props.lapData.m_bestLapTime === 0 ? 
+    if (props.sessionHistoryData !== null) date.setMilliseconds(props.sessionHistoryData.bestLapTimeInMS)
+    
+    const bestLap = props.sessionHistoryData === null || props.sessionHistoryData.bestLapTimeInMS === 0 ? 'NO TIME' : date.toISOString().substr(15, 8)
+    const delta = props.sessionHistoryData === null || props.sessionHistoryData.bestLapTimeInMS === 0 ? 
         'NO TIME' : 
-        props.lapData.m_bestLapTime === props.flap ? 
+        props.sessionHistoryData.bestLapTimeInMS === props.flap ? 
             bestLap : 
-            '+' + (props.lapData.m_bestLapTime - props.flap).toFixed(3)
+            '+' + ((props.sessionHistoryData.bestLapTimeInMS - props.flap)/1000).toFixed(3) //divide result by 1000 to convert from MS to S
     const driverName = props.nameType === 'short' ? props.participant.m_name.substr(0,3) : props.participant.m_name
 
     const tyres = props.carStatus ?
-        visualTyreCompounds[props.carStatus.m_tyreVisualCompound] :
+        visualTyreCompounds[props.carStatus.m_visualTyreCompound] :
         'unknown'
 
     var infoElement;
