@@ -6,7 +6,7 @@ POC to take the UDP data that the F1 game outputs, and turn it into a TV style r
 
 there's two apps basically, a node.js app in the server folder and a React app in the client folder. 
 
-the node.js app receives the data from the F1 game (note: only tested with F1 2020) using https://github.com/racehub-io/f1-telemetry-client to turn all the UDP stuff into nice and friendly JSON. It then outputs this using socket.io to port 4001.
+the node.js app receives the data from the F1 game (note: should now work on F1 2021) using https://github.com/racehub-io/f1-telemetry-client to turn all the UDP stuff into nice and friendly JSON. It then outputs this using socket.io to port 4001.
 
 the React app then takes that JSON off port 4001 and does stuff with it. simple.
 
@@ -17,7 +17,7 @@ let's assume you're going to run both the server and client on the same computer
 1) get the local IP address of this computer, let's say it's 192.168.0.10.
 2) go into the F1 game, go to Telemetry and enable it. set the IP address to output the data to as your computer's IP address e.g. 192.168.0.10.
 3) open client/src/F1Client.js and near the start there's a bit that says "const ENDPOINT = "http://192.168.0.9:4001" - change this to whatever your computer's IP address is, but make sure you have :4001 on the end.
-4) open terminal/command prompt/whatever and navigate to the server folder, run "npm install" if you haven't already, and run "node index.js". if it's working you should see a couple of messages, one about getting data with a little car emoji, and one about listening on port 4001.
+4) open terminal/command prompt/whatever and navigate to the server folder, run "npm install" if you haven't already, and run "npm start". if it's working you should see a couple of messages, one about getting data with a little car emoji, and one about listening on port 4001.
 5) open another terminal/command prompt/whatever and navigate to the client folder, run "npm install" if you haven't already, and run "npm start". if it's working you should get a webpage pop up and the server terminal window will say something about a client connecting.
 6) do something in the F1 game to make stuff happen - you need to actually be in a session for it to work properly
 
