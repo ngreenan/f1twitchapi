@@ -16,7 +16,7 @@ const server = http.createServer(app);
 const io = socketIo(server, { cors: { origin: '*', methods: ['GET','POST']}});
 
 //set up f1-telemetry-client
-const { F1TelemetryClient, constants } = require('@f1-telemetry-client')
+const { F1TelemetryClient, constants } = require('@racehub-io/f1-telemetry-client')
 const { PACKETS } = constants;
 
 const f1Client = new F1TelemetryClient({port: 20777, bigintEnabled: false})
@@ -37,7 +37,8 @@ f1Client.start()
 
 
 //do the stuff
-let interval;
+let interval
+let processedSessionHistory = new Array(22)
 
 io.on("connection", (socket) => {
   console.log("New client connected");
@@ -53,7 +54,10 @@ io.on("connection", (socket) => {
     //f1Client.on(PACKETS.finalClassification, sendFinalClassificationData);
     f1Client.on(PACKETS.lobbyInfo, sendLobbyInfoData);
     f1Client.on(PACKETS.carDamage, sendCarDamageData);
-    f1Client.on(PACKETS.sessionHistory, sendSessionHistoryData);
+    f1Client.on(PACKETS.sessionHistory, (data) => {
+        sendSessionHistoryData(data);
+        processSessionHistoryData(data);
+    });
     
     socket.on("disconnect", () => {
         console.log("Client disconnected");
@@ -130,6 +134,20 @@ io.on("connection", (socket) => {
         //console.log(data)
         socket.emit(PACKETS.sessionHistory, data)
         socket.emit('SessionHistoryTimestamp', new Date())
+    }
+
+    function processSessionHistoryData(data) {
+        let sessionHistory = {}
+        sessionHistory.bestLapNumber = data.m_bestLapTimeLapNum
+        sessionHistory.bestLapTimeInMS = data.m_bestLapTimeLapNum === 0 ? 0 : data.m_lapHistoryData[data.m_bestLapTimeLapNum - 1].m_lapTimeInMS
+        processedSessionHistory[data.m_carIdx] = sessionHistory
+        sendProcessedSessionHistoryData(processedSessionHistory)
+    }
+
+    function sendProcessedSessionHistoryData(data) {
+        //console.log(data)
+        socket.emit('processedSessionHistory', data)
+        socket.emit('ProcessedSessionHistoryTimestamp', new Date())
     }
 });
 
