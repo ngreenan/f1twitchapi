@@ -56,7 +56,7 @@ export const visualTyreCompounds = [
     'inter', //7
     'wet', //8
     '','','','','','','',
-    'soft', //15
-    'medium', //16
-    'hard' //17
+    'soft', //16
+    'medium', //17
+    'hard' //18
 ]
