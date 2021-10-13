@@ -128,6 +128,8 @@
     padding-top: calc(var(--driver-margin) / 4);
     padding-bottom: calc(var(--driver-margin) / 4);
     background-color: black;
+    font-variant-ligatures: none;
+    text-transform: uppercase;
 }
 
 .tower-driver-info {
