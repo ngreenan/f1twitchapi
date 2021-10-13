@@ -8,8 +8,14 @@ const ENDPOINT = "http://192.168.0.9:4001"
 export default function F1Client() {
 
     const {
-        setEventResponse, setMotionResponse, setCarSetupsResponse, setLapDataResponse, setSessionResponse, setParticipantsResponse, setCarTelemetryResponse, setCarStatusResponse, setFinalClassificationResponse, setLobbyInfoResponse,
-        setEventTimestamp, setMotionTimestamp, setCarSetupsTimestamp, setLapDataTimestamp, setSessionTimestamp, setParticipantsTimestamp, setCarTelemetryTimestamp, setCarStatusTimestamp, setFinalClassificationTimestamp, setLobbyInfoTimestamp
+        //set responses
+        setEventResponse, setMotionResponse, setCarSetupsResponse, setLapDataResponse, setSessionResponse, 
+        setParticipantsResponse, setCarTelemetryResponse, setCarStatusResponse, setFinalClassificationResponse, setLobbyInfoResponse,
+        setCarDamageResponse, setSessionHistoryResponse, setProcessedSessionHistoryResponse,
+        //set timestamps
+        setEventTimestamp, setMotionTimestamp, setCarSetupsTimestamp, setLapDataTimestamp, setSessionTimestamp, 
+        setParticipantsTimestamp, setCarTelemetryTimestamp, setCarStatusTimestamp, setFinalClassificationTimestamp, setLobbyInfoTimestamp,
+        setCarDamageTimestamp, setSessionHistoryTimestamp, setProcessedSessionHistoryTimestamp
     } = useContext(DataContext)
 
     useEffect(() => {
@@ -17,8 +23,8 @@ export default function F1Client() {
 
         //event
         socket.on("event", data => {
-            setEventResponse(data);
-        });
+            setEventResponse(data)
+        })
 
         socket.on('EventTimestamp', data => {
             setEventTimestamp(data)
@@ -26,8 +32,8 @@ export default function F1Client() {
 
         //motion
         socket.on("motion", data => {
-            setMotionResponse(data);
-        });
+            setMotionResponse(data)
+        })
 
         socket.on('MotionTimestamp', data => {
             setMotionTimestamp(data)
@@ -35,8 +41,8 @@ export default function F1Client() {
 
         //carSetups
         socket.on("carSetups", data => {
-            setCarSetupsResponse(data);
-        });
+            setCarSetupsResponse(data)
+        })
 
         socket.on('CarSetupsTimestamp', data => {
             setCarSetupsTimestamp(data)
@@ -44,8 +50,8 @@ export default function F1Client() {
 
         //lapData
         socket.on("lapData", data => {
-            setLapDataResponse(data);
-        });
+            setLapDataResponse(data)
+        })
 
         socket.on('LapDataTimestamp', data => {
             setLapDataTimestamp(data)
@@ -53,8 +59,8 @@ export default function F1Client() {
 
         //session
         socket.on("session", data => {
-            setSessionResponse(data);
-        });
+            setSessionResponse(data)
+        })
 
         socket.on('SessionTimestamp', data => {
             setSessionTimestamp(data)
@@ -62,8 +68,8 @@ export default function F1Client() {
 
         //participants
         socket.on("participants", data => {
-            setParticipantsResponse(data);
-        });
+            setParticipantsResponse(data)
+        })
 
         socket.on('ParticipantsTimestamp', data => {
             setParticipantsTimestamp(data)
@@ -71,8 +77,8 @@ export default function F1Client() {
 
         //carTelemetry
         socket.on("carTelemetry", data => {
-            setCarTelemetryResponse(data);
-        });
+            setCarTelemetryResponse(data)
+        })
 
         socket.on('CarTelemetryTimestamp', data => {
             setCarTelemetryTimestamp(data)
@@ -80,8 +86,8 @@ export default function F1Client() {
 
         //carStatus
         socket.on("carStatus", data => {
-            setCarStatusResponse(data);
-        });
+            setCarStatusResponse(data)
+        })
 
         socket.on('CarStatusTimestamp', data => {
             setCarStatusTimestamp(data)
@@ -89,8 +95,8 @@ export default function F1Client() {
 
         //finalClassification
         socket.on("finalClassification", data => {
-            setFinalClassificationResponse(data);
-        });
+            setFinalClassificationResponse(data)
+        })
 
         socket.on('FinalClassificationTimestamp', data => {
             setFinalClassificationTimestamp(data)
@@ -98,11 +104,38 @@ export default function F1Client() {
 
         //lobbyInfo
         socket.on("lobbyInfo", data => {
-            setLobbyInfoResponse(data);
-        });
+            setLobbyInfoResponse(data)
+        })
 
         socket.on('LobbyInfoTimestamp', data => {
             setLobbyInfoTimestamp(data)
+        })
+
+        //carDamage
+        socket.on("carDamage", data => {
+            setCarDamageResponse(data)
+        })
+
+        socket.on('CarDamageTimestamp', data => {
+            setCarDamageTimestamp(data)
+        })
+
+        //sessionHistory
+        socket.on("sessionHistory", data => {
+            setSessionHistoryResponse(data)
+        })
+
+        socket.on('SessionHistoryTimestamp', data => {
+            setSessionHistoryTimestamp(data)
+        })
+
+        //processedSessionHistory
+        socket.on("processedSessionHistory", data => {
+            setProcessedSessionHistoryResponse(data)
+        })
+
+        socket.on('ProcessedSessionHistoryTimestamp', data => {
+            setProcessedSessionHistoryTimestamp(data)
         })
 
         return () => socket.disconnect();

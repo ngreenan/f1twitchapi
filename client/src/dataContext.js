@@ -32,11 +32,22 @@ function DataContextProvider(props) {
     const [lobbyInfoResponse, setLobbyInfoResponse] = useState({});
     const [lobbyInfoTimestamp, setLobbyInfoTimestamp] = useState('');
 
+    const [carDamageResponse, setCarDamageResponse] = useState({});
+    const [carDamageTimestamp, setCarDamageTimestamp] = useState('');
+
+    const [sessionHistoryResponse, setSessionHistoryResponse] = useState({});
+    const [sessionHistoryTimestamp, setSessionHistoryTimestamp] = useState('');
+
+    const [processedSessionHistoryResponse, setProcessedSessionHistoryResponse] = useState({});
+    const [processedSessionHistoryTimestamp, setProcessedSessionHistoryTimestamp] = useState('');
+
     const valueObject = {
-        eventResponse, motionResponse, carSetupsResponse, lapDataResponse, sessionResponse, participantsResponse, carTelemetryResponse, carStatusResponse, finalClassificationResponse, lobbyInfoResponse,
-        eventTimestamp, motionTimestamp, carSetupsTimestamp, lapDataTimestamp, sessionTimestamp, participantsTimestamp, carTelemetryTimestamp, carStatusTimestamp, finalClassificationTimestamp, lobbyInfoTimestamp,
-        setEventResponse, setMotionResponse, setCarSetupsResponse, setLapDataResponse, setSessionResponse, setParticipantsResponse, setCarTelemetryResponse, setCarStatusResponse, setFinalClassificationResponse, setLobbyInfoResponse,
-        setEventTimestamp, setMotionTimestamp, setCarSetupsTimestamp, setLapDataTimestamp, setSessionTimestamp, setParticipantsTimestamp, setCarTelemetryTimestamp, setCarStatusTimestamp, setFinalClassificationTimestamp, setLobbyInfoTimestamp,
+        eventResponse, motionResponse, carSetupsResponse, lapDataResponse, sessionResponse, participantsResponse, carTelemetryResponse, carStatusResponse, finalClassificationResponse, lobbyInfoResponse, carDamageResponse, sessionHistoryResponse,
+        eventTimestamp, motionTimestamp, carSetupsTimestamp, lapDataTimestamp, sessionTimestamp, participantsTimestamp, carTelemetryTimestamp, carStatusTimestamp, finalClassificationTimestamp, lobbyInfoTimestamp, carDamageTimestamp, sessionHistoryTimestamp,
+        processedSessionHistoryResponse, processedSessionHistoryTimestamp,
+        setEventResponse, setMotionResponse, setCarSetupsResponse, setLapDataResponse, setSessionResponse, setParticipantsResponse, setCarTelemetryResponse, setCarStatusResponse, setFinalClassificationResponse, setLobbyInfoResponse, setCarDamageResponse, setSessionHistoryResponse,
+        setEventTimestamp, setMotionTimestamp, setCarSetupsTimestamp, setLapDataTimestamp, setSessionTimestamp, setParticipantsTimestamp, setCarTelemetryTimestamp, setCarStatusTimestamp, setFinalClassificationTimestamp, setLobbyInfoTimestamp, setCarDamageTimestamp, setSessionHistoryTimestamp,
+        setProcessedSessionHistoryResponse, setProcessedSessionHistoryTimestamp 
     }
 
     return (
