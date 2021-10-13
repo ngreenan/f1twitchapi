@@ -16,22 +16,24 @@ const server = http.createServer(app);
 const io = socketIo(server, { cors: { origin: '*', methods: ['GET','POST']}});
 
 //set up f1-telemetry-client
-const { F1TelemetryClient, constants } = require('f1-telemetry-client')
+const { F1TelemetryClient, constants } = require('@f1-telemetry-client')
 const { PACKETS } = constants;
 
 const f1Client = new F1TelemetryClient({port: 20777, bigintEnabled: false})
 f1Client.start()
 
-// f1Client.on(PACKETS.event, console.log);
-// f1Client.on(PACKETS.motion, console.log);
-// f1Client.on(PACKETS.carSetups, console.log);
-// f1Client.on(PACKETS.lapData, console.log);
-// f1Client.on(PACKETS.session, console.log);
-// f1Client.on(PACKETS.participants, console.log);
-// f1Client.on(PACKETS.carTelemetry, console.log);
-// f1Client.on(PACKETS.carStatus, console.log);
-// f1Client.on(PACKETS.finalClassification, console.log);
-// f1Client.on(PACKETS.lobbyInfo, console.log);
+// f1Client.on(PACKETS.event, console.log); 
+// f1Client.on(PACKETS.motion, console.log); 
+// f1Client.on(PACKETS.carSetups, console.log); 
+// f1Client.on(PACKETS.lapData, console.log); 
+// f1Client.on(PACKETS.session, console.log); 
+// f1Client.on(PACKETS.participants, console.log); 
+// f1Client.on(PACKETS.carTelemetry, console.log); 
+// f1Client.on(PACKETS.carStatus, console.log); 
+// f1Client.on(PACKETS.finalClassification, console.log); 
+// f1Client.on(PACKETS.lobbyInfo, console.log); 
+// f1Client.on(PACKETS.carDamage, console.log);
+// f1Client.on(PACKETS.sessionHistory, console.log);
 
 
 //do the stuff
@@ -50,6 +52,8 @@ io.on("connection", (socket) => {
     f1Client.on(PACKETS.carStatus, sendCarStatusData);
     //f1Client.on(PACKETS.finalClassification, sendFinalClassificationData);
     f1Client.on(PACKETS.lobbyInfo, sendLobbyInfoData);
+    f1Client.on(PACKETS.carDamage, sendCarDamageData);
+    f1Client.on(PACKETS.sessionHistory, sendSessionHistoryData);
     
     socket.on("disconnect", () => {
         console.log("Client disconnected");
@@ -116,6 +120,17 @@ io.on("connection", (socket) => {
         socket.emit('LobbyInfoTimestamp', new Date())
     }
 
+    function sendCarDamageData(data) {
+        //console.log(data)
+        socket.emit(PACKETS.carDamage, data)
+        socket.emit('CarDamageTimestamp', new Date())
+    }
+
+    function sendSessionHistoryData(data) {
+        //console.log(data)
+        socket.emit(PACKETS.sessionHistory, data)
+        socket.emit('SessionHistoryTimestamp', new Date())
+    }
 });
 
 const getApiAndEmit = socket => {
