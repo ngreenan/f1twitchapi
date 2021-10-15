@@ -41,13 +41,19 @@ function DataContextProvider(props) {
     const [processedSessionHistoryResponse, setProcessedSessionHistoryResponse] = useState({});
     const [processedSessionHistoryTimestamp, setProcessedSessionHistoryTimestamp] = useState('');
 
+    const [driverInfo, setDriverInfo] = useState({});
+    const [driverInfoTimestamp, setDriverInfoTimestamp] = useState('');
+
+    const [sessionInfo, setSessionInfo] = useState({});
+    const [sessionInfoTimestamp, setSessionInfoTimestamp] = useState('');
+
     const valueObject = {
         eventResponse, motionResponse, carSetupsResponse, lapDataResponse, sessionResponse, participantsResponse, carTelemetryResponse, carStatusResponse, finalClassificationResponse, lobbyInfoResponse, carDamageResponse, sessionHistoryResponse,
         eventTimestamp, motionTimestamp, carSetupsTimestamp, lapDataTimestamp, sessionTimestamp, participantsTimestamp, carTelemetryTimestamp, carStatusTimestamp, finalClassificationTimestamp, lobbyInfoTimestamp, carDamageTimestamp, sessionHistoryTimestamp,
-        processedSessionHistoryResponse, processedSessionHistoryTimestamp,
+        processedSessionHistoryResponse, processedSessionHistoryTimestamp, driverInfo, driverInfoTimestamp, sessionInfo, sessionInfoTimestamp,
         setEventResponse, setMotionResponse, setCarSetupsResponse, setLapDataResponse, setSessionResponse, setParticipantsResponse, setCarTelemetryResponse, setCarStatusResponse, setFinalClassificationResponse, setLobbyInfoResponse, setCarDamageResponse, setSessionHistoryResponse,
         setEventTimestamp, setMotionTimestamp, setCarSetupsTimestamp, setLapDataTimestamp, setSessionTimestamp, setParticipantsTimestamp, setCarTelemetryTimestamp, setCarStatusTimestamp, setFinalClassificationTimestamp, setLobbyInfoTimestamp, setCarDamageTimestamp, setSessionHistoryTimestamp,
-        setProcessedSessionHistoryResponse, setProcessedSessionHistoryTimestamp 
+        setProcessedSessionHistoryResponse, setProcessedSessionHistoryTimestamp, setDriverInfo, setDriverInfoTimestamp, setSessionInfo, setSessionInfoTimestamp,
     }
 
     return (

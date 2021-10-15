@@ -3,7 +3,7 @@ import socketIOClient from 'socket.io-client'
 import { DataContext } from './dataContext'
 
 //const ENDPOINT = "http://127.0.0.1:4001";
-const ENDPOINT = "http://192.168.0.9:4001"
+const ENDPOINT = "http://192.168.0.8:4001"
 
 export default function F1Client() {
 
@@ -11,11 +11,11 @@ export default function F1Client() {
         //set responses
         setEventResponse, setMotionResponse, setCarSetupsResponse, setLapDataResponse, setSessionResponse, 
         setParticipantsResponse, setCarTelemetryResponse, setCarStatusResponse, setFinalClassificationResponse, setLobbyInfoResponse,
-        setCarDamageResponse, setSessionHistoryResponse, setProcessedSessionHistoryResponse,
+        setCarDamageResponse, setSessionHistoryResponse, setProcessedSessionHistoryResponse, setDriverInfo, setSessionInfo,
         //set timestamps
         setEventTimestamp, setMotionTimestamp, setCarSetupsTimestamp, setLapDataTimestamp, setSessionTimestamp, 
         setParticipantsTimestamp, setCarTelemetryTimestamp, setCarStatusTimestamp, setFinalClassificationTimestamp, setLobbyInfoTimestamp,
-        setCarDamageTimestamp, setSessionHistoryTimestamp, setProcessedSessionHistoryTimestamp
+        setCarDamageTimestamp, setSessionHistoryTimestamp, setProcessedSessionHistoryTimestamp, setDriverInfoTimestamp, setSessionInfoTimestamp,
     } = useContext(DataContext)
 
     useEffect(() => {
@@ -137,6 +137,25 @@ export default function F1Client() {
         socket.on('ProcessedSessionHistoryTimestamp', data => {
             setProcessedSessionHistoryTimestamp(data)
         })
+
+        //driverInfo
+        socket.on("driverInfo", data => {
+            setDriverInfo(data)
+        })
+
+        socket.on('DriverInfoTimestamp', data => {
+            setDriverInfoTimestamp(data)
+        })
+
+        //sessionInfo
+        socket.on("sessionInfo", data => {
+            setSessionInfo(data)
+        })
+
+        socket.on('SessionInfoTimestamp', data => {
+            setSessionInfoTimestamp(data)
+        })
+
 
         return () => socket.disconnect();
     }, []);

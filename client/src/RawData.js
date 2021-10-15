@@ -17,6 +17,8 @@ function RawData(props) {
         carDamageResponse,
         sessionHistoryResponse,
         processedSessionHistoryResponse,
+        driverInfo,
+        sessionInfo,
 
         eventTimestamp, 
         motionTimestamp, 
@@ -30,7 +32,9 @@ function RawData(props) {
         lobbyInfoTimestamp,
         carDamageTimestamp,
         sessionHistoryTimestamp,
-        processedSessionHistoryTimestamp
+        processedSessionHistoryTimestamp,
+        driverInfoTimestamp,
+        sessionInfoTimestamp,
     } = useContext(DataContext)
 
     return (
@@ -150,6 +154,24 @@ function RawData(props) {
             </p>
             <p>
                 Timestamp: <time dateTime={processedSessionHistoryTimestamp}>{processedSessionHistoryTimestamp}</time>
+            </p>
+            <hr />
+
+            <p>
+                Driver Info Data: <span style={{ fontWeight: 'bold' }}>{JSON.stringify(driverInfo)}</span>
+
+            </p>
+            <p>
+                Timestamp: <time dateTime={driverInfoTimestamp}>{driverInfoTimestamp}</time>
+            </p>
+            <hr />
+
+            <p>
+                Session Info Data: <span style={{ fontWeight: 'bold' }}>{JSON.stringify(sessionInfo)}</span>
+
+            </p>
+            <p>
+                Timestamp: <time dateTime={sessionInfoTimestamp}>{sessionInfoTimestamp}</time>
             </p>
             <hr />
         </div>
