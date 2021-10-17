@@ -51,6 +51,8 @@ class DriverInfo {
     bestLapNumber = 0;
     bestLapTimeInMS = 0;
     carPosition = 0;
+    carPositionChange = 0;
+    carPositionChangeExpiry = 0;
     resultStatus = -1;
     resultStatusText = '';
     driverStatus = -1;
@@ -118,7 +120,6 @@ class SessionInfo {
 }
 
 //do the stuff
-let interval
 const maxDrivers = 22
 let driverInfos = new Array(maxDrivers)
 let sessionInfo
@@ -128,13 +129,23 @@ let trackLength = 0
 const maxMarsalZones = 21
 let marshalZonesLength = new Array(maxMarsalZones)
 
+const positionChangeExpiry = 5; //seconds
+let interval;
+
 io.on("connection", (socket) => {
     
     console.log("New client connected");
+
+    //test - only send the DriverInfos every 100ms, should be frequent enough and i think before it was getting out of hand...
+    if (interval) clearInterval(interval)
+    interval = setInterval(() => {
+        //console.log('sending DriverInfos...')
+        sendDriverInfos()
+    }, 100)
     
     socket.on("disconnect", () => {
         console.log("Client disconnected");
-    
+        if (interval) clearInterval(interval)
     });
 
     f1Client.on(PACKETS.event, sendEventData);
@@ -178,7 +189,7 @@ io.on("connection", (socket) => {
     }
 
     function sendSessionInfo() {
-        console.log(sessionInfo)
+        //console.log(sessionInfo)
 
         socket.emit('sessionInfo', sessionInfo);
         socket.emit('SessionInfoTimestamp', new Date());
@@ -222,6 +233,25 @@ io.on("connection", (socket) => {
                 //do nothing - yet
             } else {
                 //update the object
+                let expiryDate = new Date()
+                if (driverInfos[index].carPosition > lapData.m_carPosition) {
+                    driverInfos[index].carPositionChange = 1
+                    driverInfos[index].carPositionChangeExpiry = expiryDate.setSeconds(expiryDate.getSeconds() + positionChangeExpiry)
+                    console.log('car moved up from ' + driverInfos[index].carPosition + ' to ' + lapData.m_carPosition + ', expires ' + driverInfos[index].carPositionChangeExpiry)
+                    console.log(driverInfos[index])
+                } else if (driverInfos[index].carPosition < lapData.m_carPosition) {
+                    driverInfos[index].carPositionChange = -1
+                    driverInfos[index].carPositionChangeExpiry = expiryDate.setSeconds(expiryDate.getSeconds() + positionChangeExpiry)
+                    console.log('car moved down from ' + driverInfos[index].carPosition + ' to ' + lapData.m_carPosition + ', expires ' + driverInfos[index].carPositionChangeExpiry)
+                } else {
+                    if (driverInfos[index].carPositionChangeExpiry !== 0 
+                        && driverInfos[index].carPositionChangeExpiry < expiryDate) {
+                            driverInfos[index].carPositionChange = 0
+                            driverInfos[index].carPositionChangeExpiry = 0
+                            console.log('position change expired')
+                    }
+                }
+
                 driverInfos[index].carPosition = lapData.m_carPosition;
                 driverInfos[index].resultStatus = lapData.m_resultStatus;
                 driverInfos[index].resultStatusText = RESULTSTATUS[lapData.m_resultStatus];
@@ -239,7 +269,16 @@ io.on("connection", (socket) => {
                 if (driverInfos[index].currentLapNum !== lapData.m_currentLapNum) {
                     driverInfos[index].totalPreviousLapTimesInMS += lapData.m_lastLapTimeInMS;
                     
-                    if (sessionInfo.currentLapNum < lapData.m_currentLapNum) {
+                    //did we set a new personal best?
+                    if (driverInfos[index].bestLapTimeInMS === 0 
+                        || lapData.m_lastLapTimeInMS < driverInfos[index].bestLapTimeInMS) {
+
+                            //yep, we did
+                            driverInfos[index].bestLapTimeInMS = lapData.m_lastLapTimeInMS
+                        }
+
+
+                    if (sessionInfo && sessionInfo.currentLapNum < lapData.m_currentLapNum) {
                         sessionInfo.currentLapNum = lapData.m_currentLapNum
                     }
                 }
@@ -438,10 +477,15 @@ io.on("connection", (socket) => {
         if (driverInfos[index] !== undefined) {
             //try and update the lap data
             driverInfos[index].bestLapNumber = data.m_bestLapTimeLapNum
-            driverInfos[index].bestLapTimeInMS = data.m_bestLapTimeLapNum === 0 ? 0 : data.m_lapHistoryData[data.m_bestLapTimeLapNum - 1].m_lapTimeInMS
+
+            if (data.m_bestLapTimeLapNum === 0 && driverInfos[index].bestLapTimeInMS === 0) {
+                driverInfos[index].bestLapTimeInMS = 0
+            } else if (data.m_bestLapTimeLapNum !== 0) {
+                driverInfos[index].bestLapTimeInMS = data.m_lapHistoryData[data.m_bestLapTimeLapNum - 1].m_lapTimeInMS
+            }
         }
 
-        sendDriverInfos()
+        //sendDriverInfos()
     }
 
     function sendProcessedSessionHistoryData(data) {
