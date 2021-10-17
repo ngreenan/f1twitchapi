@@ -1,23 +1,41 @@
 import React from 'react'
+import { DataContext } from './dataContext'
 import './TowerDriver.css'
 import { visualTyreCompounds } from './LookupData'
 
 function TowerDriver(props) {
 
     const date = new Date(0)
-    if (props.sessionHistoryData !== null) date.setMilliseconds(props.sessionHistoryData.bestLapTimeInMS)
+    const nameType = props.towerMode === 'fullname' ? 'long' : 'short'
+    if (props.driver !== null) date.setMilliseconds(props.driver.bestLapTimeInMS)
     
-    const bestLap = props.sessionHistoryData === null || props.sessionHistoryData.bestLapTimeInMS === 0 ? 'NO TIME' : date.toISOString().substr(15, 8)
-    const delta = props.sessionHistoryData === null || props.sessionHistoryData.bestLapTimeInMS === 0 ? 
+    const bestLap = props.driver === null || props.driver.bestLapTimeInMS === 0 ? 'NO TIME' : date.toISOString().substr(15, 8)
+    const delta = props.driver === null || props.driver.bestLapTimeInMS === 0 ? 
         'NO TIME' : 
-        props.sessionHistoryData.bestLapTimeInMS === props.flap ? 
+        props.driver.bestLapTimeInMS === props.flap ? 
             bestLap : 
-            '+' + ((props.sessionHistoryData.bestLapTimeInMS - props.flap)/1000).toFixed(3) //divide result by 1000 to convert from MS to S
-    const driverName = props.nameType === 'short' ? props.participant.m_name.substr(0,3) : props.participant.m_name
+            '+' + ((props.driver.bestLapTimeInMS - props.flap)/1000).toFixed(3) //divide result by 1000 to convert from MS to S
+    const driverName = 
+        props.driver === null ? '' :
+        nameType === 'long' ? props.driver.driverName : props.driver.driverShortName
 
-    const tyres = props.carStatus ?
-        visualTyreCompounds[props.carStatus.m_visualTyreCompound] :
+    // const tyres = props.driver ?
+    //     visualTyreCompounds[props.driver.currentTyre] :
+    //     'unknown'
+
+    const tyres = props.driver ?
+        props.driver.currentTyreName :
         'unknown'
+
+    let positionChange = 'none'
+    
+    if (props.driver && props.driver.carPositionChange === -1) {
+        console.log('driver moved down')
+        positionChange = 'down'
+    } else if (props.driver && props.driver.carPositionChange === 1) {
+        console.log('driver moved up')
+        positionChange = props.driver.carPosition === 1 ? 'top' : 'up'
+    }
 
     var infoElement;
 
@@ -34,6 +52,10 @@ function TowerDriver(props) {
                     </div>
                     </div>
             break
+        case 'shortname':
+            break;
+        case 'fullname':
+            break;
         default:
             break
     }
@@ -41,13 +63,13 @@ function TowerDriver(props) {
     return (
 
         <>
-            { props.participant && props.participant.m_name 
+            { props.driver && props.driver.driverName 
                 ? 
-                <div className={`tower-driver tower-driver-${props.lapData.m_carPosition}`}>
+                <div className={`tower-driver tower-driver-${props.driver.carPosition}`}>
                     <div className='tower-driver-position-outer'>
-                    <div className='tower-driver-position-inner'>{props.lapData.m_carPosition}</div>
+                    <div className={`tower-driver-position-inner tower-driver-position-inner-${positionChange}`}>{props.driver.carPosition}</div>
                     </div>
-                    <div className='tower-driver-name'>{driverName}</div>
+                    <div className={`tower-driver-name tower-driver-name-${nameType}`}>{driverName}</div>
                     {
                         infoElement
                     }
@@ -59,8 +81,8 @@ function TowerDriver(props) {
     )
 }
 
-TowerDriver.defaultProps = {
-    nameType: 'short'
-}
+// TowerDriver.defaultProps = {
+//     nameType: 'short'
+// }
 
 export default TowerDriver
