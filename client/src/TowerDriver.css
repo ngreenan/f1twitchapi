@@ -107,54 +107,70 @@
 .tower-driver-position-inner {
     margin: calc(var(--driver-margin) / 4);
     border-radius: 0 0 10px 0;
-    background-color: white;
+    background: white;
     color: black;
     width: calc(var(--driver-spacing) - var(--driver-margin));
     height: calc(var(--driver-spacing) - var(--driver-margin));
     text-align: center;
     line-height: calc(var(--driver-spacing) - var(--driver-margin));
-    font-size: calc(var(--driver-spacing) * 0.45);
-    transition: background-color ease-in 1s;
+    font-size: calc(var(--driver-spacing) * 0.5);
+    /* transition: background-color ease-in 1s; */
 }
 
 .tower-driver-position-inner-up {
-    background-color: green;
+    
+    background: #ffffff;
+    background: linear-gradient(315deg, #ffffff 0%, #ffffff 50%, #32cd32 50%, #32cd32 100%);
+    background-size: 200% 200%;
+    animation: position-change 6s;
 }
 
 .tower-driver-position-inner-down {
-    background-color: red;
-    /* animation-duration: 2s;
-    animation-name: flash;
-    animation-iteration-count: infinite;
-    animation-direction: alternate; */
+
+    background: #ffffff;
+    background: linear-gradient(315deg, #ffffff 0%, #ffffff 50%, #ff0000 50%, #ff0000 100%);
+    background-size: 200% 200%;
+    animation: position-change 6s;
 }
 
-/* @keyframes flash {
-    from {
-      background-color: red;
-    }
-  
-    to {
-      background-color: white;;
-    }
-  } */
-
 .tower-driver-position-inner-top {
-    background-color: purple;
+    background: #ffffff;
+    background: linear-gradient(315deg, #ffffff 0%, #ffffff 50%, #a124d8 50%, #a124d8 100%);
+    background-size: 200% 200%;
+    animation: position-change 6s;
 }
 
 .tower-driver-position-inner-none {
     background-color: white;
 }
 
+@keyframes position-change {
+    0% {
+        background-position: 0% 0%;
+    }   
+    
+    43.2% {
+        background-position: 0% 0%;
+    }
+
+    49.9% {
+        background-position: 100% 100%;
+    }
+
+    100% {
+        background-color: white;
+        background-position: 100% 100%;
+    }
+}
+
 .tower-driver-name {
     text-align: left;
     line-height: var(--driver-spacing);
     color: white;
-    padding-left: 15px;
-    font-size: calc(var(--driver-spacing) * 0.5);
+    padding-left: 10px;
+    font-size: calc(var(--driver-spacing) * 0.52);
     font-family: 'Formula1Bold';
-    width: 94px;
+    width: 65px;
     height: calc(var(--driver-spacing) - (var(--driver-margin) / 2));
     padding-top: calc(var(--driver-margin) / 4);
     padding-bottom: calc(var(--driver-margin) / 4);
@@ -164,7 +180,7 @@
 }
 
 .tower-driver-name-long {
-    width: 210px;
+    width: 176px;
 }
 
 .tower-driver-info {
@@ -185,6 +201,11 @@
 .tower-driver-1 .tower-driver-info, .tower-driver-1 .tower-driver-name-long {
     border-top-right-radius: 10px;
 }
+
+
+/* .tower-driver-bottom .tower-driver-info {
+    border-bottom-right-radius: 10px;
+} */
 
 .tower-driver-delta, .tower-driver-best {
     font-variant-numeric: tabular-nums;
@@ -228,4 +249,158 @@
 
 .tower-driver-tyres-wet {
     background-image: url('./images/tyres/w.png')
+}
+
+.tower-team {
+    width: 34px;
+    height: calc(var(--driver-spacing) - (var(--driver-margin) / 2));
+    padding-top: calc(var(--driver-margin) / 4);
+    padding-bottom: calc(var(--driver-margin) / 4);
+    background-color: black;
+    font-variant-ligatures: none;
+    text-transform: uppercase;
+
+    /* transform: skewX(-45deg); */
+}
+
+.tower-team-logo {
+    position: absolute;
+    height: 100%;
+    width: 40px;
+    margin-left: -6px;
+    height: calc(var(--driver-spacing) - (var(--driver-margin) / 2) - 5px);
+    margin-top: 2.5px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+
+.tower-team-background {
+    position: absolute;
+    height: calc(var(--driver-spacing) - (var(--driver-margin) / 2) - 5px);
+    margin-top: 2.5px;
+    width: 45px;
+    transform: skewX(-45deg);
+    background: #000000;
+}
+
+.tower-team-background-overlay {
+    position: absolute;
+    height: calc(var(--driver-spacing) - (var(--driver-margin) / 2) - 4px);
+    margin-top: 2px;
+    width: 45px;
+    margin-left: -11px;
+    background: radial-gradient(at 80% 80%, rgba(0,0,0,0) 0, rgba(0,0,0,0) 23%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,0) 80%);
+}
+
+.tower-team-0 .tower-team-background {
+    /* mercedes */
+    background-color: #68d0b4;
+    background: linear-gradient(45deg, #00000000 0%, #00000000 10%, #68d0b4 65.5%, #00000000 65.5%, #00000000 100%);
+}
+
+.tower-team-1 .tower-team-background {
+    /* ferrari */
+    background-color: #e94131;
+    background: linear-gradient(45deg, #00000000 0%, #00000000 10%, #e94131 65.5%, #00000000 65.5%, #00000000 100%);
+}
+
+.tower-team-2 .tower-team-background {
+    /* red bull */
+    background-color: #455de7;
+    background: linear-gradient(45deg, #00000000 0%, #00000000 10%, #455de7 65.5%, #00000000 65.5%, #00000000 100%);
+}
+
+.tower-team-3 .tower-team-background {
+    /* williams */
+    background-color: #3e8eba;
+    background: linear-gradient(45deg, #00000000 0%, #00000000 10%, #3e8eba 65.5%, #00000000 65.5%, #00000000 100%);
+}
+
+.tower-team-4  .tower-team-background{
+    /* aston martin */
+    background-color: #347a65;
+    background: linear-gradient(45deg, #00000000 0%, #00000000 10%, #347a65 65.5%, #00000000 65.5%, #00000000 100%);
+}
+
+.tower-team-5  .tower-team-background {
+    /* alpine */
+    background-color: #000000;
+    background: linear-gradient(45deg, #00000000 0%, #00000000 10%, #000000 65.5%, #00000000 65.5%, #00000000 100%);
+}
+
+.tower-team-6  .tower-team-background{
+    /* alphatauri */
+    background-color: #374252;
+    background: linear-gradient(45deg, #00000000 0%, #00000000 10%, #374252 65.5%, #00000000 65.5%, #00000000 100%);
+}
+
+.tower-team-7  .tower-team-background{
+    /* haas */
+    background-color: #e3e4e4;
+    background: linear-gradient(45deg, #00000000 0%, #00000000 10%, #e3e4e4 65.5%, #00000000 65.5%, #00000000 100%);
+}
+
+.tower-team-8  .tower-team-background{
+    /* mclaren */
+    background-color: #5a5a5c;
+    background: linear-gradient(45deg, #00000000 0%, #00000000 10%, #5a5a5c 65.5%, #00000000 65.5%, #00000000 100%);
+    
+}
+
+.tower-team-9  .tower-team-background{
+    /* alfa romeo */
+    background-color: #8f3332;
+    background: linear-gradient(45deg, #00000000 0%, #00000000 10%, #8f3332 65.5%, #00000000 65.5%, #00000000 100%);
+}
+
+/* team logos */
+.tower-team-0 .tower-team-logo {
+    
+    background-image: url('./images/teams/mercedes.png');
+}
+
+.tower-team-1 .tower-team-logo {
+    
+    background-image: url('./images/teams/ferrari.png');
+}
+
+.tower-team-2 .tower-team-logo {
+    
+    background-image: url('./images/teams/redbull.png');
+}
+
+.tower-team-3 .tower-team-logo {
+    
+    background-image: url('./images/teams/williams.png');
+}
+
+.tower-team-4 .tower-team-logo {
+    
+    background-image: url('./images/teams/astonmartin.png');
+}
+
+.tower-team-5 .tower-team-logo {
+    
+    background-image: url('./images/teams/alpine.png');
+}
+
+.tower-team-6 .tower-team-logo {
+    
+    background-image: url('./images/teams/alphatauri.png');
+}
+
+.tower-team-7 .tower-team-logo {
+    
+    background-image: url('./images/teams/haas.png');
+}
+
+.tower-team-8 .tower-team-logo {
+    
+    background-image: url('./images/teams/mclaren.png');
+}
+
+.tower-team-9 .tower-team-logo {
+    
+    background-image: url('./images/teams/alfaromeo.png');
 }

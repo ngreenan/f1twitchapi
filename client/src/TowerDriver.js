@@ -70,6 +70,11 @@ function TowerDriver(props) {
                     <div className={`tower-driver-position-inner tower-driver-position-inner-${positionChange}`}>{props.driver.carPosition}</div>
                     </div>
                     <div className={`tower-driver-name tower-driver-name-${nameType}`}>{driverName}</div>
+                    <div className={`tower-team tower-team-${props.driver.driverTeam}`}>
+                        <div className='tower-team-background'></div>
+                        <div className='tower-team-background-overlay'></div>
+                        <div className='tower-team-logo'></div>
+                    </div>
                     {
                         infoElement
                     }
